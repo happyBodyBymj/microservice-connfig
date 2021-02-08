@@ -1,0 +1,20 @@
+server:
+  port: 7006
+spring:
+  application:
+    name: microservice-zuul-geteway
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka8761.com:8761/eureka,http://eureka8762.com:8762/eureka
+  instance:
+    instance-id: ${apring.application.name}:${server.port}
+    prefer-ip-address: true
+zuul:
+  routes:
+    provider-product:
+      path: /product/**
+      serviceId: microservice-product
+      stripPrefix: false
